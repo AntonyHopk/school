@@ -10,13 +10,13 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>api-gateway</module>
-        <module>auth-service</module>
-        <module>user-service</module>
-        <module>course-service</module>
-        <module>learning-service</module>
-        <module>community-service</module>
-        <module>notification-service</module>
+        <module>services/api-gateway</module>
+        <module>services/auth-service</module>
+        <module>services/user-service</module>
+        <module>services/course-service</module>
+        <module>services/learning-service</module>
+        <module>services/community-service</module>
+        <module>services/notification-service</module>
     </modules>
 
     <properties>
