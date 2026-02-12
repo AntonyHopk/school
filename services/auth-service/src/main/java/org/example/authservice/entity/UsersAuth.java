@@ -1,0 +1,29 @@
+package org.example.authservice.entity;
+
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+
+import java.time.Instant;
+
+@Getter
+@Setter
+@Entity
+@RequiredArgsConstructor
+@Table(name = "users_auth")
+public class UsersAuth {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column(nullable = false, unique = true)
+    private String email;
+    @Column(name = "password_hash", nullable = false)
+    private String passwordHash;
+    @Column(nullable = false)
+    private String role;
+    @Column(name = "is_blocked", nullable = false)
+    private boolean isBlocked = false;
+    @Column(name = "created_at", nullable = false)
+    private Instant createdAt = Instant.now();
+}

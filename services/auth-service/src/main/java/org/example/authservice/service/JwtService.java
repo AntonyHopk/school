@@ -1,0 +1,59 @@
+package org.example.authservice.service;
+
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.*;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
+import lombok.RequiredArgsConstructor;
+import org.example.authservice.entity.UsersAuth;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
+import javax.crypto.SecretKey;
+import java.time.Instant;
+import java.util.Date;
+
+@Service
+public class JwtService {
+    private final SecretKey key;
+    private final long accessTtl;
+    private final long refreshTtl;
+
+    public JwtService(
+            @Value("${app.jwt.secret}") String secret,
+            @Value("${app.jwt.access-ttl}") long accessTtl,
+            @Value("${app.jwt.refresh-ttl}") long refreshTtl
+
+    ) {
+
+        this.key = Keys.hmacShaKeyFor(secret.getBytes());
+        this.accessTtl = accessTtl;
+        this.refreshTtl = refreshTtl;
+    }
+
+    public String generateAccessToken(Long userId, String role) {
+        return Jwts.builder()
+                .setSubject(userId.toString())
+                .claim("role", role)
+                .setIssuedAt(new Date())
+                .setExpiration(Date.from(Instant.now()))
+                .signWith(key)
+                .compact();
+    }
+
+    public String generateRefreshToken(Long userId) {
+        return Jwts.builder()
+                .setSubject(userId.toString())
+                .setIssuedAt(new Date())
+                .setExpiration(Date.from(Instant.now()))
+                .signWith(key)
+                .compact();
+    }
+
+    public Claims parse(String token) {
+        return Jwts.parser()
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
+    }
+}
