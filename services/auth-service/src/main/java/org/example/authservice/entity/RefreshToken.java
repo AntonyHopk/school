@@ -20,8 +20,8 @@ public class RefreshToken {
     private String tokenHash;
     @Column(name = "expires_at", nullable = false)
     private Instant expiresAt;
-    @Column(name = "revoked_at")
-    private Instant revokedAt;
+    @Column(name = "revoke_at")
+    private Instant revokeAt;
     @Column(name = "created_at", nullable = false)
     private Instant createdAt = Instant.now();
     @ManyToOne(fetch = FetchType.LAZY)

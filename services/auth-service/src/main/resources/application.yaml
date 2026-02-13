@@ -27,8 +27,8 @@ spring:
 app:
   jwt:
     secret: ${JWT_SECRET:Q9mF4xVtL2pZaW8kYdG3sHnR6bUcJeT1iKo7PlNxYmZqV3rStUwXcAfHgJkLmNoP}
-    access-ttl-minutes: ${JWT_ACCESS_TTL_MINUTES:15}
-    refresh-ttl-days: ${JWT_REFRESH_TTL_DAYS:14}
+    access-ttl: ${JWT_ACCESS_TTL_MINUTES:15}
+    refresh-ttl: ${JWT_REFRESH_TTL_DAYS:14}
 
 springdoc:
   api-docs:
