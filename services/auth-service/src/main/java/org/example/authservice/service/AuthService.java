@@ -6,6 +6,7 @@ import org.example.authservice.entity.RefreshToken;
 import org.example.authservice.entity.UsersAuth;
 import org.example.authservice.repository.RefreshTokenRepository;
 import org.example.authservice.repository.UserAuthRepository;
+import org.example.authservice.security.JwtService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -43,7 +44,7 @@ public class AuthService {
         RefreshToken refreshTokenObj = new RefreshToken();
         refreshTokenObj.setUser(user);
         refreshTokenObj.setTokenHash(refreshToken);
-        refreshTokenObj.setExpiredAt(Instant.now().plusSeconds(604800));
+        refreshTokenObj.setExpiresAt(Instant.now().plusSeconds(604800));
         refreshTokenRepository.save(refreshTokenObj);
 
         return new TokenResponse(access,refreshToken);

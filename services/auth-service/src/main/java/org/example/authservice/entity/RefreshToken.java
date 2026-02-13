@@ -18,8 +18,8 @@ public class RefreshToken {
     private Long id;
     @Column(name = "token_hash", nullable = false, unique = true)
     private String tokenHash;
-    @Column(name = "expired_at", nullable = false)
-    private Instant expiredAt;
+    @Column(name = "expires_at", nullable = false)
+    private Instant expiresAt;
     @Column(name = "revoked_at")
     private Instant revokedAt;
     @Column(name = "created_at", nullable = false)
