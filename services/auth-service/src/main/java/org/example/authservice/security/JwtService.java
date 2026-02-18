@@ -32,8 +32,8 @@ public class JwtService {
         return Jwts.builder()
                 .setSubject(userId.toString())
                 .claim("role", role)
-                .setIssuedAt(new Date())
-                .setExpiration(Date.from(Instant.now()))
+                .setIssuedAt(Date.from(Instant.now()))
+                .setExpiration(Date.from(Instant.now().plusSeconds(accessTtl*60)))
                 .signWith(key)
                 .compact();
     }
@@ -41,16 +41,17 @@ public class JwtService {
     public String generateRefreshToken(Long userId) {
         return Jwts.builder()
                 .setSubject(userId.toString())
-                .setIssuedAt(new Date())
-                .setExpiration(Date.from(Instant.now()))
+                .setIssuedAt(Date.from(Instant.now()))
+                .setExpiration(Date.from(Instant.now().plusSeconds(refreshTtl*24*60*60)))
                 .signWith(key)
                 .compact();
     }
 
     public Claims parse(String token) {
         return Jwts.parser()
+                .verifyWith(key)
                 .build()
-                .parseClaimsJws(token)
-                .getBody();
+                .parseSignedClaims(token)
+                .getPayload();
     }
 }

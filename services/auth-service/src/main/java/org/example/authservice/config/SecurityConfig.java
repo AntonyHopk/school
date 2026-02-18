@@ -16,12 +16,10 @@ public class SecurityConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return  http.
                 csrf(csrf->csrf.disable())
-                .httpBasic(Customizer.withDefaults())
+                .httpBasic(basic->basic.disable())
                 .formLogin(form->form.disable())
                 .authorizeHttpRequests(auth->auth.requestMatchers(
-                        "/auth/register",
-                        "/auth/login",
-                        "/auth/refresh",
+                        "/auth/**",
                         "/v3/api-docs/**",
                         "/swagger-ui/**",
                         "/swagger-ui.html"

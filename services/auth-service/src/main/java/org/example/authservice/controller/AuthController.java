@@ -2,7 +2,10 @@ package org.example.authservice.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.example.authservice.DTO.LoginRequest;
+import org.example.authservice.DTO.LogoutRequest;
+import org.example.authservice.DTO.RefreshRequest;
 import org.example.authservice.DTO.RegisterRequest;
+import org.example.authservice.entity.RefreshToken;
 import org.example.authservice.service.AuthService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,5 +26,14 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
         return ResponseEntity.ok(authService.login(loginRequest.email(), loginRequest.password()));
+    }
+    @PostMapping("/refresh")
+    public ResponseEntity<?> refresh(@RequestBody RefreshRequest refreshResponse) {
+        return ResponseEntity.ok(authService.refreshToken(refreshResponse.refreshToken()));
+    }
+    @PostMapping("/logout")
+    public ResponseEntity<?> logout(@RequestBody LogoutRequest logoutRequest) {
+        authService.logout(logoutRequest.refreshToken());
+        return ResponseEntity.noContent().build();
     }
 }
