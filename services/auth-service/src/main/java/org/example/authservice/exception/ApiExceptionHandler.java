@@ -11,7 +11,7 @@ public class ApiExceptionHandler {
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<Map<String, Object>> handleIllegalArgumentException(IllegalArgumentException e) {
         return ResponseEntity.status(401).body(Map.of(
-                "error", "UNATHORIZED",
+                "error", "UNAUTHORIZED",
                 "message", e.getMessage()));
     }
 
