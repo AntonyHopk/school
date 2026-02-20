@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.example.authservice.DTO.TokenResponse;
 import org.example.authservice.entity.RefreshToken;
 import org.example.authservice.entity.UsersAuth;
+import org.example.authservice.kafka.AuthEventsProducer;
 import org.example.authservice.repository.RefreshTokenRepository;
 import org.example.authservice.repository.UserAuthRepository;
 import org.example.authservice.security.JwtService;
@@ -20,6 +21,7 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final RefreshTokenRepository refreshTokenRepository;
     private final JwtService jwtService;
+    private final AuthEventsProducer authEventsProducer;
 
     public Long register(String email, String password) {
         if (userAuthRepository.findByEmail(email).isPresent()) {
@@ -29,7 +31,10 @@ public class AuthService {
         user.setEmail(email);
         user.setPasswordHash(passwordEncoder.encode(password));
         user.setRole("STUDENT");
-        return userAuthRepository.save(user).getId();
+
+        Long id = userAuthRepository.save(user).getId();
+        authEventsProducer.userRegistered(id, user.getEmail(), user.getRole());
+        return id;
 
     }
 
