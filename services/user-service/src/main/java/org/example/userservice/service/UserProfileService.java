@@ -11,11 +11,17 @@ import org.example.userservice.exception.NotFoundException;
 import org.example.userservice.repository.UserProfileRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class UserProfileService {
 
     private final UserProfileRepository userProfileRepository;
+
+    public List<UserProfileResponse> findAll() {
+        return userProfileRepository.findAll().stream().map(this::toResponse).toList();
+    }
 
     @Transactional
     public UserProfileResponse getById(Long id) {

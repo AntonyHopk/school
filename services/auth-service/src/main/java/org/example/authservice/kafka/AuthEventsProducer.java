@@ -7,6 +7,8 @@ import org.springframework.stereotype.Component;
 import java.time.Instant;
 import java.util.UUID;
 
+import static org.apache.kafka.common.requests.DeleteAclsResponse.log;
+
 @Component
 @RequiredArgsConstructor
 public class AuthEventsProducer {
@@ -23,5 +25,6 @@ public class AuthEventsProducer {
                 new AuthUserRegisteredPayload(userId, email, role)
         );
         kafkaTemplate.send(TOPIC_USER_REGISTERED, userId.toString(), event);
+        log.info("User {} registered successfully", userId);
     }
 }

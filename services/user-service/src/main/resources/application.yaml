@@ -31,7 +31,7 @@ spring:
     properties:
       spring.json.trusted.packages: "*"
       spring.json.use.type.headers: false
-      spring.json.value.default.type: "org.example.userservice.kafka.EventEnvelope"
+      spring.json.value.default.type: "org.example.userservice.kafka.AuthUserRegisteredEvent"
 
 
 springdoc:

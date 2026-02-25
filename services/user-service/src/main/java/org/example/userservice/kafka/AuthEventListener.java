@@ -11,6 +11,8 @@ import org.springframework.stereotype.Component;
 
 import java.util.UUID;
 
+import static org.apache.kafka.common.requests.DeleteAclsResponse.log;
+
 
 @Component
 @RequiredArgsConstructor
@@ -21,10 +23,10 @@ public class AuthEventListener {
 
     @Transactional
     @KafkaListener(
-            topics = TOPIC,
-            containerFactory = "userRegisteredKafkaListenerContainerFactory"
+            topics = TOPIC
     )
-    public void onUserRegistered(EventEnvelope<AuthUserRegisteredPayload> envelope) {
+    public void onUserRegistered(AuthUserRegisteredEvent envelope) {
+        log.info("recieved"+envelope.eventType()+" "+envelope.payload().userId());
         if (consumedRepo.existsById(envelope.eventId())) {
             return;
         }

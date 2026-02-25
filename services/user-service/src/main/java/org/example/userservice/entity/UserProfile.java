@@ -19,9 +19,9 @@ public class UserProfile {
     @Column(nullable = false, unique = true, length = 50)
     private String username;
     @Column(name = "first_name", nullable = false, length = 50)
-    private String firstName;
+    private String firstName="user_first_name";
     @Column(name = "last_name", nullable = false, length = 50)
-    private String lastName;
+    private String lastName="user_last_name";
     @Column(length = 500)
     private String bio;
     @Column(name = "avatar_url", length = 500)
