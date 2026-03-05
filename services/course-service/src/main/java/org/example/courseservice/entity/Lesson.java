@@ -25,7 +25,7 @@ public class Lesson {
     @Column(nullable = false,length = 200)
     private String title;
 
-    @Lob
+    @Column(columnDefinition = "text")
     private String content;
 
     @Column(nullable = false)

@@ -29,7 +29,9 @@ spring:
     properties:
       spring.json.use.type.headers: false
 
-
+app:
+  jwt:
+    secret: ${JWT_SECRET:Q9mF4xVtL2pZaW8kYdG3sHnR6bUcJeT1iKo7PlNxYmZqV3rStUwXcAfHgJkLmNoP}
 
 springdoc:
   api-docs:

@@ -28,7 +28,7 @@ public class Course {
     private String description;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false,length = 20)
+    @Column(name="status",nullable = false,length = 20)
     private CourseStatus courseStatus = CourseStatus.DRAFT;
 
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL,orphanRemoval = true)
