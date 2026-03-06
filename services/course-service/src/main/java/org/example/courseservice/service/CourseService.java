@@ -11,6 +11,7 @@ import org.example.courseservice.exception.ForbiddenException;
 import org.example.courseservice.exception.NotFoundException;
 import org.example.courseservice.kafka.CourseEventProducer;
 import org.example.courseservice.repository.CourseRepository;
+import org.example.courseservice.security.JwtPrincipal;
 import org.example.courseservice.security.RequestPrincipal;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +22,7 @@ public class CourseService {
     private final CourseEventProducer events;
 
     @Transactional
-    public CourseResponse create(RequestPrincipal principal, CreateCourseRequest req) {
+    public CourseResponse create(JwtPrincipal principal, CreateCourseRequest req) {
         requireTeacher(principal);
         Course c = new Course();
         c.setOwnerUserId(principal.userId());
@@ -38,7 +39,7 @@ public class CourseService {
     }
 
     @Transactional
-    public CourseResponse update(RequestPrincipal principal, Long id, UpdateCourseRequest req) {
+    public CourseResponse update(JwtPrincipal principal, Long id, UpdateCourseRequest req) {
         requireTeacher(principal);
         Course c = courseRepository.findById(id).orElseThrow(() -> new NotFoundException("Course not found"));
         requireOwner(principal, c);
@@ -52,7 +53,7 @@ public class CourseService {
     }
 
     @Transactional
-    public void delete(RequestPrincipal principal, Long id) {
+    public void delete(JwtPrincipal principal, Long id) {
         requireTeacher(principal);
         Course c = courseRepository.findById(id).orElseThrow(() -> new NotFoundException("Course not found"));
         requireOwner(principal, c);
@@ -60,7 +61,7 @@ public class CourseService {
     }
 
     @Transactional
-    public CourseResponse publish(RequestPrincipal principal, Long id) {
+    public CourseResponse publish(JwtPrincipal principal, Long id) {
         requireTeacher(principal);
         Course c = courseRepository.findById(id).orElseThrow(() -> new NotFoundException("Course not found"));
         requireOwner(principal, c);
@@ -75,7 +76,7 @@ public class CourseService {
     }
 
 
-    private void requireOwner(RequestPrincipal principal, Course c) {
+    private void requireOwner(JwtPrincipal principal, Course c) {
         if (!c.getOwnerUserId().equals(principal.userId())) {
             throw new ForbiddenException("Not your course");
         }
@@ -86,7 +87,7 @@ public class CourseService {
         return new CourseResponse(save.getId(), save.getOwnerUserId(), save.getTitle(), save.getDescription(), save.getCourseStatus(), save.getCreatedAt(), save.getUpdatedAt());
     }
 
-    private void requireTeacher(RequestPrincipal principal) {
+    private void requireTeacher(JwtPrincipal principal) {
         if (!"TEACHER".equalsIgnoreCase(principal.role())) {
             throw new ForbiddenException("Only teacher can perform this action");
         }
