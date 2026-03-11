@@ -24,7 +24,7 @@ public class AdminController {
         if (role == null) {
             return ResponseEntity.badRequest().build();
         }
-        userAdminService.changeRole(id, role);
+        userAdminService.changeRole(id, request.role());
         return ResponseEntity.noContent().build();
 
     }
