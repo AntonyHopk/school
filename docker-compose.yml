@@ -90,6 +90,8 @@ services:
       DB_PASSWORD: postgres
       KAFKA_BOOTSTRAP_SERVERS: kafka:9092
       JWT_SECRET: "Q9mF4xVtL2pZaW8kYdG3sHnR6bUcJeT1iKo7PlNxYmZqV3rStUwXcAfHgJkLmNoP"
+      ADMIN_EMAIL: "Abobaadmin@mail.ru"
+      ADMIN_PASSWORD: "Aboba123"
     depends_on:
       - kafka
       - postgres-auth
@@ -191,3 +193,23 @@ services:
     depends_on:
       - kafka
       - postgres-notification
+  pgadmin:
+    image: dpage/pgadmin4:8
+    container_name: pgadmin
+    ports:
+      - "5050:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@mail.ru
+      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_CONFIG_SERVER_MODE: "False"
+    depends_on:
+      - postgres-auth
+      - postgres-user
+      - postgres-course
+      - postgres-learning
+      - postgres-community
+      - postgres-notification
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+volumes:
+  pgadmin_data:

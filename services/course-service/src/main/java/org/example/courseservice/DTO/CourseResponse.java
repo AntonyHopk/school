@@ -1,6 +1,5 @@
 package org.example.courseservice.DTO;
 
-import org.example.courseservice.entity.Course;
 import org.example.courseservice.entity.CourseStatus;
 
 import java.time.Instant;

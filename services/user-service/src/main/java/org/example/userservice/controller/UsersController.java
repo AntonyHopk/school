@@ -1,7 +1,5 @@
 package org.example.userservice.controller;
 
-import jakarta.validation.Valid;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.example.userservice.DTO.CreateUserProfileRequest;
 import org.example.userservice.DTO.UpdateUserProfileRequest;
@@ -11,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.URI;
 import java.util.List;
 
 @RestController

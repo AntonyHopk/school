@@ -5,7 +5,6 @@ import org.example.authservice.DTO.LoginRequest;
 import org.example.authservice.DTO.LogoutRequest;
 import org.example.authservice.DTO.RefreshRequest;
 import org.example.authservice.DTO.RegisterRequest;
-import org.example.authservice.entity.RefreshToken;
 import org.example.authservice.service.AuthService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

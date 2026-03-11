@@ -1,7 +1,5 @@
 package org.example.userservice.DTO;
 
-import jakarta.persistence.Column;
-
 import java.time.Instant;
 
 public record UserProfileResponse(

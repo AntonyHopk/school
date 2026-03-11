@@ -9,8 +9,6 @@ import org.example.userservice.repository.UserProfileRepository;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
-import java.util.UUID;
-
 import static org.apache.kafka.common.requests.DeleteAclsResponse.log;
 
 

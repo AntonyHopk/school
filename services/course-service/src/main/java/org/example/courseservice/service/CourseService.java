@@ -12,7 +12,6 @@ import org.example.courseservice.exception.NotFoundException;
 import org.example.courseservice.kafka.CourseEventProducer;
 import org.example.courseservice.repository.CourseRepository;
 import org.example.courseservice.security.JwtPrincipal;
-import org.example.courseservice.security.RequestPrincipal;
 import org.springframework.stereotype.Service;
 
 @Service
