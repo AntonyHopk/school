@@ -79,8 +79,8 @@ services:
     build:
       context: .
       dockerfile: services/auth-service/Dockerfile
-    ports:
-      - "8081:8081"
+#    ports:
+#      - "8081:8081"
     environment:
       SERVER_PORT: 8081
       DB_HOST: postgres-auth
@@ -100,8 +100,8 @@ services:
     build:
       context: .
       dockerfile: services/user-service/Dockerfile
-    ports:
-      - "8082:8082"
+#    ports:
+#      - "8082:8082"
     environment:
       SERVER_PORT: 8082
       DB_HOST: postgres-user
@@ -110,6 +110,7 @@ services:
       DB_USER: postgres
       DB_PASSWORD: postgres
       KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+      JWT_SECRET: "Q9mF4xVtL2pZaW8kYdG3sHnR6bUcJeT1iKo7PlNxYmZqV3rStUwXcAfHgJkLmNoP"
     depends_on:
       - kafka
       - postgres-user
@@ -118,8 +119,8 @@ services:
     build:
       context: .
       dockerfile: services/course-service/Dockerfile
-    ports:
-      - "8083:8083"
+#    ports:
+#      - "8083:8083"
     environment:
       SERVER_PORT: 8083
       DB_HOST: postgres-course

@@ -27,20 +27,6 @@ public class UsersController {
         return userProfileService.findAll();
     }
 
-    @PostMapping
-    public ResponseEntity<UserProfileResponse> create(@RequestBody CreateUserProfileRequest createUserProfileRequest) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(userProfileService.create(createUserProfileRequest));
-    }
 
-    @PatchMapping("/{id}")
-    public ResponseEntity<?> patchUserProfile(@PathVariable Long id, @RequestBody UpdateUserProfileRequest updateUserProfileRequest) {
-        return ResponseEntity.ok(userProfileService.update(id, updateUserProfileRequest));
-    }
-
-    @DeleteMapping
-    public ResponseEntity<?> deleteUserProfile(@PathVariable Long id) {
-        userProfileService.delete(id);
-        return ResponseEntity.noContent().build();
-    }
 }
 

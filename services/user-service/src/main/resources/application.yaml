@@ -32,7 +32,9 @@ spring:
       spring.json.trusted.packages: "*"
       spring.json.use.type.headers: false
       spring.json.value.default.type: "org.example.userservice.kafka.AuthUserRegisteredEvent"
-
+app:
+  jwt:
+    secret: ${JWT_SECRET:Q9mF4xVtL2pZaW8kYdG3sHnR6bUcJeT1iKo7PlNxYmZqV3rStUwXcAfHgJkLmNoP}
 
 springdoc:
   api-docs:

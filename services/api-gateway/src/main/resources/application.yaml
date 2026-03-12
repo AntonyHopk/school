@@ -12,8 +12,6 @@ spring:
           uri: http://auth-service:8081
           predicates:
             - Path=/auth/**
-          filters:
-            - StripPrefix=1
 
         - id: users
           uri: http://user-service:8082
@@ -39,3 +37,8 @@ spring:
           uri: http://notification-service:8086
           predicates:
             - Path=/notifications/**
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
